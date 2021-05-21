@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:http/http.dart' as http;
-//import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:my_veggielist_app/http/network.dart';
 
 void main() {
@@ -11,27 +11,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title, this.placeData}) : super(key: key);
+  MyHomePage({Key key, this.placeData}) : super(key: key);
 
-  final String title;
   final dynamic placeData;
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class Place {
   String title;
-  void main() {
-    setState(() {});
-  }
+  String description;
+  String image;
 
+  Place(this.title, this.description, this.image);
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  dynamic placeData;
+  List data = [];
   @override
   void initState() {
     fetchData();
@@ -42,12 +45,23 @@ class _MyHomePageState extends State<MyHomePage> {
     //  var url = Uri.parse('https://tebackend.herokuapp.com/api/places');
     NetWork network = NetWork();
     var placeData = await network.getJson();
-    //  print(placeData);
+    // print(placeData);
+    List<dynamic> placeList = placeData['places'];
+    for (int i = 0; i < placeList.length; i++) {
+      var place = placeList[i];
+      Place placeToAdd =
+          Place(place['title'], place['description'], place['image']);
+      print(placeToAdd.image);
+
+      setState(() {
+        data.add(placeToAdd);
+      });
+    }
   }
 
 /*
   void fetchData() async {
-    var url = Uri.parse('https://tebackend.herokuapp.com/api/places');
+    var url = Uri.parse('url');
     // Response response = await get(url);
     http.Response response = await http.get(url);
     if (response.statusCode == 200) {
@@ -66,11 +80,11 @@ class _MyHomePageState extends State<MyHomePage> {
 */
   @override
   Widget build(BuildContext context) {
-    void updateData(dynamic data) {
+    /*   void updateData(dynamic data) {
       var description = data['description'];
       print(description);
     }
-
+  
     @override
     void initState() {
       super.initState();
@@ -78,27 +92,139 @@ class _MyHomePageState extends State<MyHomePage> {
       updateData(widget.placeData);
       // print(widget.placeData);
     }
+*/
 
-    var description;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              '$description',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Text(
-              '1234656',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-    );
+        body: ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              Place place = data[index];
+              return
+                  //Text(place.description);
+                  Padding(
+                      padding: EdgeInsets.all(17.0),
+                      child: InkWell(
+                          onTap: () {},
+                          child: Stack(children: <Widget>[
+                            Container(
+                              height: 270.0,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  image: DecorationImage(
+                                      image: NetworkImage(place.image),
+                                      //              //  '${recipepost['img_url']}'),
+                                      fit: BoxFit.cover)),
+                            ),
+                            //make the shade a bit deeper.
+                            Container(
+                              height: 270.0,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: Colors.black.withOpacity(0.3)),
+                            ),
+                            Positioned(
+                              top: 10.0,
+                              left: 10.0,
+                              child: Row(
+                                children: <Widget>[
+                                  Container(
+                                    height: 50.0,
+                                    width: 110.0,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        color: Colors.black.withOpacity(0.2)),
+                                    child: Center(
+                                        child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        // Icon(Icons.star, color: Colors.white, size: 12.0),
+                                        // SizedBox(width: 5.0),
+
+                                        Text(
+                                          '자세히보기',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15.0,
+                                          ),
+                                        )
+                                      ],
+                                    )),
+                                  ),
+                                  //   SizedBox(width: 50.0),
+                                  //   Text(
+                                  //    'More',
+                                  //    style: TextStyle(
+                                  //        color: Colors.white,
+                                  //fontFamily: 'Opensans'
+                                  //        ),
+                                  //  ),
+                                  // SizedBox(width: 7.0),
+                                  //this should be an iconbutton in a real app.
+                                  //   Icon(Icons.arrow_drop_down, color: Colors.white, size: 25.0)
+                                ],
+                              ),
+                            ),
+                            Positioned(
+                              top: 55.0,
+                              left: 20.0,
+                              child: Container(
+                                width: 220.0,
+                                child: Text(place.title,
+                                    style: TextStyle(
+                                      //  fontFamily: 'Opensans',
+                                      fontSize: 30.0,
+                                      color: Colors.white,
+                                    )),
+                              ),
+                            ),
+                            Positioned(
+                                top: 200.0,
+                                left: 20.0,
+                                child: Row(children: [
+                                  Text('',
+                                      style: TextStyle(
+                                          //       fontFamily: 'Opensans',
+                                          fontSize: 30.0,
+                                          color: Colors.white)
+                                      // fontWeight: FontWeight.w600)
+                                      ),
+                                  // SizedBox(width: 15.0),
+                                  Stack(children: <Widget>[
+                                    Container(height: 40.0, width: 100.0),
+                                    //Container(
+                                    //  height: 60.0,
+                                    //  width: 60.0,
+                                    //  decoration: BoxDecoration(
+                                    //      borderRadius: BorderRadius.circular(100.0),
+                                    //  CircleAvatar(
+                                    //    backgoundImage:  NetworkImage("https://i.pinimg.com/564x/e3/54/e9/e354e97bf5d17326c3c361d884707e2c.jpg"),
+                                    //
+                                    Positioned(
+                                      left: 10.0,
+                                      child: Container(
+                                        height: 40.0,
+                                        width: 40.0,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        //      image: DecorationImage(
+                                        //    image: NetworkImage(document['chef_img']), fit: BoxFit.cover)),
+                                        child: Center(
+                                          child: Text('',
+                                              style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  color: Colors.black)),
+                                        ),
+                                      ),
+                                    )
+                                  ]),
+                                ]))
+                          ])));
+            }));
   }
 }
