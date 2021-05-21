@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_veggielist_app/controller/navigation_controller.dart';
 
-class TabPage extends StatelessWidget {
+class TabPage extends GetView<NavigationController>
+//StatelessWidget
+{
   const TabPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar: Obx(
+      () => BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          currentIndex: 0,
+          currentIndex: controller.currentIndex.value,
+          //0,
           showSelectedLabels: true,
           selectedItemColor: Colors.amber,
-          onTap: (index) {
-            print(index);
-          },
+          onTap: controller.changeIndex,
+          //print(index);
+
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.food_bank_outlined),
@@ -31,6 +37,6 @@ class TabPage extends StatelessWidget {
               label: 'MY',
             ),
           ]),
-    );
+    ));
   }
 }
