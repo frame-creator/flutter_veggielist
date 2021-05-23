@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       var place = placeList[i];
       Place placeToAdd =
           Place(place['title'], place['description'], place['image']);
-      print(placeToAdd.image);
+      //  print(placeToAdd.image);
 
       setState(() {
         data.add(placeToAdd);

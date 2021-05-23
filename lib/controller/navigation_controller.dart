@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+enum NavigationBar { HomePage, CreatePlacePage, AuthPage }
+
 class NavigationController extends GetxService {
   static NavigationController get to => Get.find();
   RxInt currentIndex = 0.obs;
