@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:my_veggielist_app/http/network.dart';
+import 'package:my_veggielist_app/http/legacy_network.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.placeData}) : super(key: key);
 
   final dynamic placeData;
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }

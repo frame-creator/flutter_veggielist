@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_veggielist_app/controller/navigation_controller.dart';
-import 'package:my_veggielist_app/main.dart';
-import 'package:my_veggielist_app/screen/home.dart';
+
+import 'package:my_veggielist_app/screen/home_page.dart';
 import 'package:my_veggielist_app/screen/create_place.dart';
 import 'package:my_veggielist_app/screen/auth.dart';
 
@@ -19,7 +19,7 @@ class TabPage extends GetView<NavigationController>
         body: Obx(() {
           switch (NavigationBar.values[controller.currentIndex.value]) {
             case NavigationBar.HomePage:
-              return MyHomePage();
+              return HomePage();
               break;
             case NavigationBar.CreatePlacePage:
               return CreatePlace();
