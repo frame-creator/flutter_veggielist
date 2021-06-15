@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class PlaceDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-      child: Text('login'),
+      child: Text('상세화면'),
     ));
   }
 }

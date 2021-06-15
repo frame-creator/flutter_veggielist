@@ -1,3 +1,5 @@
+//location":{"lat","lng"},"_id","title","description","address","image","creator","id"
+
 class PlaceList {
   final List<Place> places;
 

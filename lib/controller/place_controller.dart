@@ -13,7 +13,7 @@ class PlaceController extends GetxController {
   }
 
   void fetchPlace() async {
-    var placeList = await GetData.getPlaces();
+    var placeList = await GetManager.getPlaces();
     if (places != null) {
       places.assignAll(placeList);
     }

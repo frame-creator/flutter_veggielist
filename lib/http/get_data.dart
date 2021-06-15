@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:my_veggielist_app/models/places.dart';
 
-class GetData {
+class GetManager {
   static Future getPlaces() async {
     var url = Uri.parse('url');
     // Response response = await get(url);

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_veggielist_app/controller/navigation_controller.dart';
+import 'package:my_veggielist_app/screen/create_place.dart';
 
 import 'package:my_veggielist_app/screen/home_page.dart';
 import 'package:my_veggielist_app/screen/create_place.dart';
-import 'package:my_veggielist_app/screen/auth.dart';
+import 'package:my_veggielist_app/screen/login.dart';
+import 'package:my_veggielist_app/screen/place_detail_page.dart';
 
 class TabPage extends GetView<NavigationController>
 //StatelessWidget
@@ -22,10 +24,15 @@ class TabPage extends GetView<NavigationController>
               return HomePage();
               break;
             case NavigationBar.CreatePlacePage:
-              return CreatePlace();
+              return
+                  //UserPlacePage();
+                  CreatePlacePage();
+              //PlaceDetailPage();
               break;
             case NavigationBar.AuthPage:
-              return LoginPage();
+              return
+                  //SignUpPage();
+                  LoginPage();
               break;
           }
           return Container();
