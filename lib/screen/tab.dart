@@ -5,7 +5,7 @@ import 'package:my_veggielist_app/screen/create_place.dart';
 
 import 'package:my_veggielist_app/screen/home_page.dart';
 import 'package:my_veggielist_app/screen/create_place.dart';
-import 'package:my_veggielist_app/screen/login.dart';
+import 'package:my_veggielist_app/screen/login_page.dart';
 import 'package:my_veggielist_app/screen/place_detail_page.dart';
 
 class TabPage extends GetView<NavigationController>

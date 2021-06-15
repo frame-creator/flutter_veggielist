@@ -18,6 +18,8 @@ class _LoginPageState extends State<LoginPage> {
 }
 */
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+import 'package:my_veggielist_app/screen/sign_up_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -121,6 +123,7 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(height: 5.0),
           SizedBox(height: 50.0),
           GestureDetector(
+            //  behavior: HitTestBehavior.translucent,
             onTap: () {},
             child: Container(
                 height: 50.0,
@@ -140,7 +143,9 @@ class _LoginPageState extends State<LoginPage> {
             Text('계정을 만드시겠어요?'),
             SizedBox(width: 5.0),
             InkWell(
-                onTap: () {},
+                onTap: () {
+                  Get.to(SignUpPage());
+                },
                 child: Text('회원가입',
                     style: TextStyle(
                         color: themeColorOne,
