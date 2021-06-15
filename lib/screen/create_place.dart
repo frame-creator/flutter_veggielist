@@ -30,9 +30,9 @@ class _CreatePlacePageState extends State<CreatePlacePage> {
   final _globalkey = GlobalKey<FormState>();
   TextEditingController _title = TextEditingController();
   TextEditingController _address = TextEditingController();
-
   TextEditingController _about = TextEditingController();
   final ImagePicker _picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

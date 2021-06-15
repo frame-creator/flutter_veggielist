@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_veggielist_app/controller/auth_controller.dart';
 import 'package:my_veggielist_app/screen/login_page.dart';
 
 /*
@@ -39,9 +40,13 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final SignUpController signupcontroller = Get.put(SignUpController());
   final formKey = new GlobalKey<FormState>();
 
-  String name, email, password;
+  var name = '';
+  var email = '';
+  var password = '';
+  final _passwordController = TextEditingController();
   PickedFile _imageFile;
   Color themeColorOne = Colors.amber[400];
   //Color(0xFFD87423);
@@ -63,6 +68,28 @@ class _SignUpPageState extends State<SignUpPage> {
       return '이메일 형식에 맞지 않습니다.';
     else
       return null;
+  }
+
+  Future<void> _submit() async {
+    if (!formKey.currentState.validate()) {
+      // Invalid!
+      return;
+    }
+    formKey.currentState.save();
+    // setState(() {
+    //   _isLoading = true;
+    // });
+    try {
+      // Log user in
+      await signupcontroller.SignUp(name, email, password, _imageFile.path);
+    } on HttpException catch (error) {
+      const errorMessage = '';
+      Get.snackbar('에러가 발생했습니다.', errorMessage);
+    } catch (error) {
+      const errorMessage =
+          'Could not authenticate you. Please try again later.';
+      Get.snackbar('에러가 발생했습니다.', errorMessage);
+    }
   }
 
   @override
@@ -104,35 +131,48 @@ class _SignUpPageState extends State<SignUpPage> {
           imageProfile(),
           SizedBox(height: 25.0),
           TextFormField(
-              decoration: InputDecoration(
-                  labelText: '프로필명',
-                  labelStyle: TextStyle(
-                      fontFamily: 'Trueno',
-                      fontSize: 20.0,
-                      color: Colors.grey.withOpacity(0.5)),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: themeColorOne),
-                  )),
-              onChanged: (value) {
-                this.email = value;
-              },
-              validator: (value) =>
-                  value.isEmpty ? '프로필명을 입력해주세요.' : validateEmail(value)),
+            decoration: InputDecoration(
+                labelText: '프로필명',
+                labelStyle: TextStyle(
+                    fontFamily: 'Trueno',
+                    fontSize: 20.0,
+                    color: Colors.grey.withOpacity(0.5)),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: themeColorOne),
+                )),
+            onChanged: (value) {
+              this.name = value;
+            },
+            //    validator: (value) => value.isEmpty ? '프로필명을 입력해주세요.' : ''),
+          ),
           TextFormField(
-              decoration: InputDecoration(
-                  labelText: '이메일',
-                  labelStyle: TextStyle(
-                      fontFamily: 'Trueno',
-                      fontSize: 20.0,
-                      color: Colors.grey.withOpacity(0.5)),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: themeColorOne),
-                  )),
-              onChanged: (value) {
-                this.email = value;
-              },
-              validator: (value) =>
-                  value.isEmpty ? '이메일 주소를 입력해주세요.' : validateEmail(value)),
+            decoration: InputDecoration(
+                labelText: '이메일',
+                labelStyle: TextStyle(
+                    fontFamily: 'Trueno',
+                    fontSize: 20.0,
+                    color: Colors.grey.withOpacity(0.5)),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: themeColorOne),
+                )),
+            //  onChanged: (value) {
+            //    this.email = value;
+            //  },
+            //  validator: (value) =>
+            //      value.isEmpty ? '이메일 주소를 입력해주세요.' : validateEmail(value)),
+            validator: (value) {
+              if (value.isEmpty || !value.contains('@')) {
+                return '이메일주소를 입력해주세요.';
+              }
+              validateEmail(value);
+              return null;
+            },
+            keyboardType: TextInputType.emailAddress,
+
+            onSaved: (value) {
+              this.email = value;
+            },
+          ),
           TextFormField(
               decoration: InputDecoration(
                   labelText: '비밀번호',
@@ -144,15 +184,32 @@ class _SignUpPageState extends State<SignUpPage> {
                     borderSide: BorderSide(color: themeColorOne),
                   )),
               obscureText: true,
-              onChanged: (value) {
+              controller: _passwordController,
+              onSaved: (value) {
                 this.password = value;
               },
               validator: (value) => value.isEmpty ? '비밀번호를 입력해주세요.' : null),
+          TextFormField(
+              decoration: InputDecoration(
+                  labelText: '비밀번호 재확인',
+                  labelStyle: TextStyle(
+                      fontFamily: 'Trueno',
+                      fontSize: 20.0,
+                      color: Colors.grey.withOpacity(0.5)),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: themeColorOne),
+                  )),
+              obscureText: true,
+              validator: (value) => value != _passwordController.text
+                  ? '비밀번호를 동일하게 입력해주세요.'
+                  : null),
           SizedBox(height: 5.0),
           SizedBox(height: 50.0),
           GestureDetector(
             //  behavior: HitTestBehavior.translucent,
-            onTap: () {},
+            onTap: () {
+              _submit();
+            },
             child: Container(
                 height: 50.0,
                 child: Material(
