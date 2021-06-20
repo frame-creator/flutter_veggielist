@@ -25,6 +25,8 @@ const Color kWhite = Colors.white;
 const Color mainColor = Color(0xFFed9a4c);
 
 class _SignUpPageState extends State<SignUpPage> {
+  PickedFile _imageFile;
+  final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -45,17 +47,22 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: ClipOval(
                         child: BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                          child: CircleAvatar(
-                            radius: size.width * 0.14,
-                            backgroundColor: Colors.grey[400].withOpacity(
-                              0.4,
-                            ),
-                            child: Icon(
-                              FontAwesomeIcons.user,
-                              color: kWhite,
-                              size: size.width * 0.1,
-                            ),
-                          ),
+                          child: _imageFile == null
+                              ? CircleAvatar(
+                                  radius: size.width * 0.14,
+                                  backgroundColor: Colors.grey[400].withOpacity(
+                                    0.4,
+                                  ),
+                                  child: Icon(
+                                    FontAwesomeIcons.user,
+                                    color: kWhite,
+                                    size: size.width * 0.1,
+                                  ),
+                                )
+                              : CircleAvatar(
+                                  radius: size.width * 0.14,
+                                  backgroundImage:
+                                      FileImage(File(_imageFile.path))),
                         ),
                       ),
                     ),
@@ -70,9 +77,17 @@ class _SignUpPageState extends State<SignUpPage> {
                           shape: BoxShape.circle,
                           border: Border.all(color: kWhite, width: 2),
                         ),
-                        child: Icon(
-                          FontAwesomeIcons.arrowUp,
-                          color: kWhite,
+                        child: InkWell(
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: ((builder) => bottomSheet()),
+                            );
+                          },
+                          child: Icon(
+                            FontAwesomeIcons.arrowUp,
+                            color: kWhite,
+                          ),
                         ),
                       ),
                     )
@@ -162,6 +177,55 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  Widget bottomSheet() {
+    return Container(
+      height: 100.0,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 20,
+      ),
+      child: Column(
+        children: <Widget>[
+          Text(
+            "프로필 이미지를 골라주세요.",
+            style: TextStyle(
+              fontSize: 20.0,
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            FlatButton.icon(
+              icon: Icon(Icons.camera),
+              onPressed: () {
+                takePhoto(ImageSource.camera);
+              },
+              label: Text("카메라"),
+            ),
+            FlatButton.icon(
+              icon: Icon(Icons.image),
+              onPressed: () {
+                takePhoto(ImageSource.gallery);
+              },
+              label: Text("갤러리"),
+            ),
+          ])
+        ],
+      ),
+    );
+  }
+
+  void takePhoto(ImageSource source) async {
+    final pickedFile = await _picker.getImage(
+      source: source,
+    );
+    setState(() {
+      _imageFile = pickedFile;
+    });
   }
 
   Widget textInputField(final IconData icon, final String hint,
