@@ -1,3 +1,209 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/route_manager.dart';
+import 'package:my_veggielist_app/screen/sign_up_page.dart';
+
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final formKey = new GlobalKey<FormState>();
+
+  String email, password;
+
+  Color themeColorOne = Colors.amber[400];
+  //Color(0xFFD87423);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        backGroundImage(),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Column(
+            children: [
+              Flexible(
+                child: Center(
+                  child: Text(
+                    '베지리스트',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 50,
+                        fontFamily: 'IBMPlexSansKR-Medium',
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  textInputField(
+                    FontAwesomeIcons.envelope,
+                    '이메일',
+                    TextInputType.emailAddress,
+                    TextInputAction.next,
+                  ),
+                  passwordInput(
+                    FontAwesomeIcons.lock,
+                    '비밀번호',
+                    TextInputAction.done,
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  roundedButton(
+                    '로그인',
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '계정이 없나요?  ',
+                    style: kBodyText,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(SignUpPage());
+                    },
+                    child: Text(
+                      '회원가입',
+                      style: kBodyText.copyWith(
+                          color: mainColor, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget backGroundImage() {
+    return ShaderMask(
+      shaderCallback: (rect) => LinearGradient(
+        begin: Alignment.bottomCenter,
+        end: Alignment.center,
+        colors: [Colors.black, Colors.transparent],
+      ).createShader(rect),
+      blendMode: BlendMode.darken,
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/1.jpg'),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget textInputField(final IconData icon, final String hint,
+      final TextInputType inputType, final TextInputAction inputAction) {
+    Size size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Container(
+        height: size.height * 0.08,
+        width: size.width * 0.8,
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Center(
+          child: TextFormField(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              prefixIcon: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Icon(
+                  icon,
+                  size: 28,
+                  color: kWhite,
+                ),
+              ),
+              hintText: hint,
+              hintStyle: kBodyText,
+            ),
+            style: kBodyText,
+            keyboardType: inputType,
+            textInputAction: inputAction,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget passwordInput(
+      final iconData, final String hint, final textInputAction) {
+    Size size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Container(
+        height: size.height * 0.08,
+        width: size.width * 0.8,
+        decoration: BoxDecoration(
+          color: Colors.white70.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Center(
+          child: TextFormField(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              prefixIcon: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Icon(
+                  iconData,
+                  size: 28,
+                  color: kWhite,
+                ),
+              ),
+              hintText: hint,
+              hintStyle: kBodyText,
+            ),
+            obscureText: true,
+            style: kBodyText,
+            //   keyboardType: TextInputType,
+            textInputAction: textInputAction,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget roundedButton(String buttonName) {
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      height: size.height * 0.08,
+      width: size.width * 0.8,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: mainColor,
+      ),
+      child: FlatButton(
+        onPressed: () {},
+        child: Text(
+          buttonName,
+          style: kBodyText.copyWith(fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+}
+
 /*import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,7 +222,7 @@ class _LoginPageState extends State<LoginPage> {
     ));
   }
 }
-*/
+
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:my_veggielist_app/screen/sign_up_page.dart';
@@ -27,6 +233,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
   final formKey = new GlobalKey<FormState>();
 
   String email, password;
@@ -155,3 +362,4 @@ class _LoginPageState extends State<LoginPage> {
         ]));
   }
 }
+*/
