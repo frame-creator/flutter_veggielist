@@ -18,7 +18,7 @@ class AuthHttp {
         'email': email,
         'password': password,
         'image': await MultipartFile.fromFile(filePath,
-            filename: 'dp.jpg', contentType: MediaType(mimee, type))
+            filename: 'veggielist.jpg', contentType: MediaType(mimee, type))
       });
 
       Response response = await Dio().post('url',

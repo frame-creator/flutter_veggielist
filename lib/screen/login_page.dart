@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/route_manager.dart';
+import 'package:my_veggielist_app/controller/login_controller.dart';
 import 'package:my_veggielist_app/screen/sign_up_page.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,11 +11,27 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final formKey = new GlobalKey<FormState>();
+  final _formKey = new GlobalKey<FormState>();
 
-  String email, password;
+  var _email = '';
+  var _password = '';
+  final AuthController logincontroller = Get.put(AuthController());
+  void _submit() {
+    if (!_formKey.currentState.validate()) {
+      // Invalid!
+      return;
+    }
+    _formKey.currentState.save();
+    // setState(() {
+    //   _isLoading = true;
+    // });
 
-  Color themeColorOne = Colors.amber[400];
+    // Log user in
+    logincontroller.signIn(_email, _password);
+    //_nameController.text, _emailController.text,
+    // _passwordController.text, _imageFile.path);
+  }
+  //Color themeColorOne = Colors.amber[400];
   //Color(0xFFD87423);
 
   @override
@@ -37,31 +55,33 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  textInputField(
-                    FontAwesomeIcons.envelope,
-                    '이메일',
-                    TextInputType.emailAddress,
-                    TextInputAction.next,
-                  ),
-                  passwordInput(
-                    FontAwesomeIcons.lock,
-                    '비밀번호',
-                    TextInputAction.done,
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  roundedButton(
-                    '로그인',
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                ],
-              ),
+              Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      textInputField(
+                        FontAwesomeIcons.envelope,
+                        '이메일',
+                        TextInputType.emailAddress,
+                        TextInputAction.next,
+                      ),
+                      passwordInput(
+                        FontAwesomeIcons.lock,
+                        '비밀번호',
+                        TextInputAction.done,
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      roundedButton(
+                        '로그인',
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                    ],
+                  )),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -141,6 +161,15 @@ class _LoginPageState extends State<LoginPage> {
             style: kBodyText,
             keyboardType: inputType,
             textInputAction: inputAction,
+            validator: (value) {
+              if (value.isEmpty || !value.contains('@')) {
+                return '유효한 이메일 형식이 아닙니다.';
+              }
+              return null;
+            },
+            onSaved: (value) {
+              _email = value;
+            },
           ),
         ),
       ),
@@ -178,6 +207,15 @@ class _LoginPageState extends State<LoginPage> {
             style: kBodyText,
             //   keyboardType: TextInputType,
             textInputAction: textInputAction,
+            validator: (value) {
+              if (value.isEmpty || value.length < 6) {
+                return '비밀번호를 6자리 이상으로 설정해주세요.';
+              }
+              return null;
+            },
+            onSaved: (value) {
+              _password = value;
+            },
           ),
         ),
       ),
@@ -194,7 +232,9 @@ class _LoginPageState extends State<LoginPage> {
         color: mainColor,
       ),
       child: FlatButton(
-        onPressed: () {},
+        onPressed: () {
+          _submit();
+        },
         child: Text(
           buttonName,
           style: kBodyText.copyWith(fontWeight: FontWeight.bold),

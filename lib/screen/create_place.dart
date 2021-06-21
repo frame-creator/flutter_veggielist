@@ -14,7 +14,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_veggielist_app/http/NetworkHandler.dart';
 
 class CreatePlacePage extends StatefulWidget {
   CreatePlacePage({Key key}) : super(key: key);
@@ -24,7 +23,6 @@ class CreatePlacePage extends StatefulWidget {
 }
 
 class _CreatePlacePageState extends State<CreatePlacePage> {
-  final networkHandler = NetworkHandler();
   bool circular = false;
   PickedFile _imageFile;
   final _globalkey = GlobalKey<FormState>();

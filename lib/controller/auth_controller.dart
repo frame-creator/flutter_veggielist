@@ -6,7 +6,6 @@ import 'package:my_veggielist_app/http/auth_http.dart';
 
 class SignUpController extends GetxController {
   var isLoading = false.obs;
-  var imageURL = '';
 
   Future<void> signUp(
       String name, String email, String password, filePath) async {
