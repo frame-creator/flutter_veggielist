@@ -23,7 +23,7 @@ const TextStyle kBodyText =
     TextStyle(fontSize: 22, color: Colors.white, height: 1.5);
 
 const Color kWhite = Colors.white;
-const Color mainColor = Color(0xFFed9a4c);
+const Color mainColor = Color(0xFFF0B690);
 
 class _SignUpPageState extends State<SignUpPage> {
   PickedFile imageFile;
@@ -78,9 +78,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             child: imageFile == null
                                 ? CircleAvatar(
                                     radius: size.width * 0.14,
-                                    backgroundColor:
-                                        Colors.grey[400].withOpacity(
-                                      0.4,
+                                    backgroundColor: Colors.black26.withOpacity(
+                                      0.2,
                                     ),
                                     child: Icon(
                                       FontAwesomeIcons.user,
@@ -203,7 +202,7 @@ class _SignUpPageState extends State<SignUpPage> {
           image: DecorationImage(
             image: AssetImage('assets/images/1.jpg'),
             fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
+            colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
           ),
         ),
       ),

@@ -1,4 +1,6 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:my_veggielist_app/controller/navigation_controller.dart';
 import 'package:my_veggielist_app/screen/create_place.dart';
@@ -37,6 +39,45 @@ class TabPage extends GetView<NavigationController>
           }
           return Container();
         }),
+        bottomNavigationBar: Obx(() =>
+            //BottomNavigationBar(
+            //    type: BottomNavigationBarType.fixed,
+            //   currentIndex: controller.currentIndex.value,
+            //    //0,
+            //    showSelectedLabels: true,
+            //    selectedItemColor: Colors.amber,
+            //    onTap: controller.changeIndex,
+            //print(index);
+            CurvedNavigationBar(
+              index: controller.currentIndex.value,
+              onTap: controller.changeIndex,
+              color: Color(0xFFF0B690),
+              backgroundColor: Colors.white,
+              buttonBackgroundColor: Color(0xFFF3A470),
+              items: <Widget>[
+                Icon(FontAwesomeIcons.mapMarkerAlt,
+                    //Icons.food_bank_outlined,
+                    size: 40,
+                    color: Colors.white),
+
+                Icon(FontAwesomeIcons.edit,
+                    //  Icons.featured_play_list_outlined,
+                    size: 40,
+                    color: Colors.white),
+                //ImageIcon(AssetImage("assets/icons/search.png"), size: 30)
+                //   title: Text(''),
+                Icon(FontAwesomeIcons.user,
+                    // Icons.book_outlined,
+                    size: 40,
+                    color: Colors.white),
+              ],
+              animationDuration: Duration(milliseconds: 200),
+              animationCurve: Curves.easeIn,
+            )));
+  }
+}
+
+/*
         bottomNavigationBar: Obx(
           () => BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
@@ -67,3 +108,4 @@ class TabPage extends GetView<NavigationController>
         ));
   }
 }
+*/
