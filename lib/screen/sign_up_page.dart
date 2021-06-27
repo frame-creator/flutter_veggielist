@@ -1,18 +1,15 @@
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_veggielist_app/controller/auth_controller.dart';
-
-import 'package:my_veggielist_app/screen/login_page.dart';
 
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_veggielist_app/screen/tab.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -82,7 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       0.2,
                                     ),
                                     child: Icon(
-                                      FontAwesomeIcons.user,
+                                      FontAwesomeIcons.userAstronaut,
                                       color: kWhite,
                                       size: size.width * 0.1,
                                     ),
@@ -127,7 +124,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Column(
                     children: [
                       textInputField(
-                        FontAwesomeIcons.user,
+                        FontAwesomeIcons.userAstronaut,
                         '프로필명',
                         TextInputType.name,
                         TextInputAction.next,
@@ -164,7 +161,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.back();
+                              // Get.back();
+                              Get.to(TabPage());
                             },
                             child: Text(
                               '로그인',

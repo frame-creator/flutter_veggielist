@@ -2,13 +2,13 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:my_veggielist_app/controller/navigation_controller.dart';
 import 'package:my_veggielist_app/screen/create_place.dart';
 
 import 'package:my_veggielist_app/screen/home_page.dart';
-import 'package:my_veggielist_app/screen/create_place.dart';
 import 'package:my_veggielist_app/screen/login_page.dart';
-import 'package:my_veggielist_app/screen/place_detail_page.dart';
+import 'package:my_veggielist_app/screen/user_page.dart';
 
 class TabPage extends GetView<NavigationController>
 //StatelessWidget
@@ -17,6 +17,7 @@ class TabPage extends GetView<NavigationController>
 
   @override
   Widget build(BuildContext context) {
+    final userdata = GetStorage();
     return Scaffold(
         // body: MyHomePage(),
         // ignore: missing_return
@@ -32,9 +33,13 @@ class TabPage extends GetView<NavigationController>
               //PlaceDetailPage();
               break;
             case NavigationBar.AuthPage:
-              return
-                  //SignUpPage();
-                  LoginPage();
+              if (userdata.read('username') == null) {
+                return
+                    //SignUpPage();
+                    LoginPage();
+              } else {
+                return UserPage();
+              }
               break;
           }
           return Container();
@@ -66,7 +71,7 @@ class TabPage extends GetView<NavigationController>
                     color: Colors.white),
                 //ImageIcon(AssetImage("assets/icons/search.png"), size: 30)
                 //   title: Text(''),
-                Icon(FontAwesomeIcons.user,
+                Icon(FontAwesomeIcons.userAstronaut,
                     // Icons.book_outlined,
                     size: 40,
                     color: Colors.white),

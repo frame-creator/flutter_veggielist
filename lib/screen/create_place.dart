@@ -138,7 +138,7 @@ class _CreatePlacePageState extends State<CreatePlacePage> {
       child: Column(
         children: <Widget>[
           Text(
-            "Choose Profile photo",
+            "맛집 사진을 등록해주세요",
             style: TextStyle(
               fontSize: 20.0,
             ),
@@ -152,14 +152,14 @@ class _CreatePlacePageState extends State<CreatePlacePage> {
               onPressed: () {
                 takePhoto(ImageSource.camera);
               },
-              label: Text("Camera"),
+              label: Text("카메라"),
             ),
             FlatButton.icon(
               icon: Icon(Icons.image),
               onPressed: () {
                 takePhoto(ImageSource.gallery);
               },
-              label: Text("Gallery"),
+              label: Text("갤러리"),
             ),
           ])
         ],
