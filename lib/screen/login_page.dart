@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/route_manager.dart';
 import 'package:my_veggielist_app/controller/login_controller.dart';
+import 'package:my_veggielist_app/controller/userprofile_controller.dart';
 import 'package:my_veggielist_app/screen/sign_up_page.dart';
 import 'package:get/get.dart';
+import 'package:my_veggielist_app/screen/tab.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -16,6 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   var _email = '';
   var _password = '';
   final AuthController logincontroller = Get.put(AuthController());
+  final ProfileController profilecontroller = Get.put(ProfileController());
   void _submit() {
     if (!_formKey.currentState.validate()) {
       // Invalid!
@@ -30,6 +33,8 @@ class _LoginPageState extends State<LoginPage> {
     logincontroller.signIn(_email, _password);
     //_nameController.text, _emailController.text,
     // _passwordController.text, _imageFile.path);
+    profilecontroller.getUserProfile();
+    Get.to(TabPage());
   }
   //Color themeColorOne = Colors.amber[400];
   //Color(0xFFD87423);

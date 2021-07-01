@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_veggielist_app/screen/tab.dart';
 import 'package:my_veggielist_app/screen/user_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -79,7 +80,7 @@ class AuthController extends GetxService {
       print(userdata.read('email'));
       print(userinfo);
       if (userinfo != null) {
-        Get.to(UserPage());
+        Get.off(TabPage());
       }
       final prefs = await SharedPreferences.getInstance();
       final userData = json.encode(

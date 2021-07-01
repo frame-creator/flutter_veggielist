@@ -8,7 +8,7 @@ class UserController extends GetxController {
   static UserController get to => Get.find();
 
   final userdata = GetStorage();
-  var isLoading = false.obs;
+  //var isLoading = false.obs;
   RxList places = [].obs;
   @override
   void onInit() {
@@ -37,16 +37,18 @@ class UserController extends GetxController {
     final response = await http.get(url);
     final responseData = json.decode(response.body);
     if (response.statusCode == 200) {
+      //  isLoading(true);
       List jsonResponse = json.decode(response.body)['places'];
-      print(jsonResponse);
+
+      //  print(jsonResponse);
       return jsonResponse.map((e) => new Place.fromJson(e)).toList();
     } else {
       return response.statusCode;
     }
 
     // print(response.body);
-    //  print(responseData);
-    // print(responseData['token']);
+    //print(responseData);
+    //   print(responseData['token']);
     //  print(responseData['userId']);
   }
 
@@ -54,8 +56,7 @@ class UserController extends GetxController {
     var placeList = await getUserPlaces();
     if (places != null) {
       places.assignAll(placeList);
-      print(placeList);
-      isLoading(true);
+      //    print(placeList);
     }
   }
 }

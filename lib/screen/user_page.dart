@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:my_veggielist_app/controller/userpage_controller.dart';
+import 'package:my_veggielist_app/controller/userprofile_controller.dart';
+import 'package:my_veggielist_app/screen/tab.dart';
 
 class UserPage extends StatefulWidget {
   UserPage({Key key}) : super(key: key);
@@ -14,6 +16,7 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
   TabController tabController;
 
   final userdata = GetStorage();
+
   final UserController usercontroller = Get.put(UserController());
   @override
   void initState() {
@@ -33,77 +36,100 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
   }
 
   Widget userProfile() {
-    return
-        //Scaffold(
-        //    body: ListView(
-        //   children: <Widget>[
-        Stack(
-      children: <Widget>[
-        Container(height: 300.0),
-        Container(
-          height: 200.0,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/1.jpg'), fit: BoxFit.cover)),
-        ),
-        Positioned(
-          top: 150.0,
-          left: 25.0,
-          child: Container(
-            height: 140.0,
-            width: 140.0,
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.white, width: 2.0),
-                borderRadius: BorderRadius.circular(70.0),
-                image: DecorationImage(
-                    image: AssetImage('assets/images/2.jpg'),
-                    fit: BoxFit.cover)),
-          ),
-        ),
-        Positioned(
-          top: 225.0,
-          left: 175.0,
-          child: Row(children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  '닉네임',
-                  style: TextStyle(
-                      fontFamily: 'SDSamliphopangcheOutline',
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  '',
-                  style: TextStyle(
-                      fontFamily: 'SDSamliphopangcheOutline',
-                      fontSize: 12.0,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(width: 15.0),
+    final ProfileController profilecontroller = Get.put(ProfileController());
+
+    return Obx(() {
+      if (profilecontroller.isLoading.value == false) {
+        return Center(
+            child: CircularProgressIndicator(
+          backgroundColor: Colors.yellow,
+        ));
+      } else {
+        return
+            //Scaffold(
+            //    body: ListView(
+            //   children: <Widget>[
+
+            Stack(
+          children: <Widget>[
+            Container(height: 300.0),
             Container(
-              height: 30.0,
-              width: 75.0,
+              height: 200.0,
               decoration: BoxDecoration(
-                  color: Color(0xFFF3B287),
-                  borderRadius: BorderRadius.circular(12.0)),
-              child: Center(
-                child: Text('로그아웃',
-                    style: TextStyle(
-                        fontFamily: 'IBMPlexSansKR-Regular',
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white)),
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/1.jpg'),
+                      fit: BoxFit.cover)),
+            ),
+            Positioned(
+              top: 150.0,
+              left: 25.0,
+              child: Container(
+                height: 140.0,
+                width: 140.0,
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 2.0),
+                    borderRadius: BorderRadius.circular(70.0),
+                    image: DecorationImage(
+                        image: (profilecontroller.user.value.image == null)
+                            ? AssetImage('assets/images/2.jpg')
+                            : NetworkImage(profilecontroller.user.value.image),
+                        fit: BoxFit.cover)),
               ),
             ),
-          ]),
-        ),
-      ],
-    );
+            Positioned(
+              top: 225.0,
+              left: 175.0,
+              child: Row(children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      (profilecontroller.user.value.name == null)
+                          ? '프로필 이름'
+                          : profilecontroller.user.value.name,
+                      style: TextStyle(
+                          fontFamily: 'SDSamliphopangcheOutline',
+                          fontSize: 19.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      (profilecontroller.user.value.email == null)
+                          ? '이메일 주소'
+                          : profilecontroller.user.value.email,
+                      style: TextStyle(
+                          fontFamily: 'SDSamliphopangcheOutline',
+                          fontSize: 15.0,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                SizedBox(width: 15.0),
+                Container(
+                  height: 30.0,
+                  width: 75.0,
+                  decoration: BoxDecoration(
+                      color: Color(0xFFF3B287),
+                      borderRadius: BorderRadius.circular(12.0)),
+                  child: TextButton(
+                    onPressed: () {
+                      userdata.erase();
+                      Get.off(TabPage());
+                    },
+                    child: Text('로그아웃',
+                        style: TextStyle(
+                            fontFamily: 'IBMPlexSansKR-Regular',
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white)),
+                  ),
+                ),
+              ]),
+            ),
+          ],
+        );
+      }
+    });
 //      ],
 //    )
     //   );
@@ -111,11 +137,15 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
 
   Widget userPlace() {
     return Obx(() {
-      if (usercontroller.isLoading.value == false) {
-        return Center(
-            child: CircularProgressIndicator(
-          backgroundColor: Colors.yellow,
-        ));
+      //  if (usercontroller.isLoading.value == false) {
+      //    return Center(
+      //        child: CircularProgressIndicator(
+      //      backgroundColor: Colors.yellow,
+      //     ));
+      //   } else {
+      if (usercontroller.places.length == null ||
+          usercontroller.places.length == 0) {
+        return Text('등록하신 장소가 없습니다.');
       } else {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
@@ -245,7 +275,9 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
                       ])));
             });
       }
-    });
+    }
+        //}
+        );
   }
 }
 
