@@ -15,13 +15,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_veggielist_app/controller/auth_controller.dart';
 
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_veggielist_app/controller/create_place_controller.dart';
 import 'package:my_veggielist_app/screen/tab.dart';
+import 'package:my_veggielist_app/screen/user_page.dart';
 
 class CreatePlacePage extends StatefulWidget {
   @override
@@ -45,12 +46,16 @@ class _CreatePlacePageState extends State<CreatePlacePage> {
   final addressController = TextEditingController();
   final descriptionController = TextEditingController();
 
-  final SignUpController authController = Get.put(SignUpController());
+  final CreatePlaceController createPlaceController =
+      Get.put(CreatePlaceController());
   void _submit() {
     if (!_formKey.currentState.validate()) {
       return;
     }
     _formKey.currentState.save();
+    createPlaceController.createPlace(
+        _title, _address, _description, imageFile.path);
+    Get.to(UserPage());
   }
 
   @override
