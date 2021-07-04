@@ -2,8 +2,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_veggielist_app/screen/tab.dart';
-import 'package:my_veggielist_app/screen/user_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 //import 'package:my_veggielist_app/http/http_exception.dart';
 
@@ -15,20 +13,6 @@ class AuthController extends GetxService {
   String _email;
   final userdata = GetStorage();
   var userinfo = ''.obs;
-  //bool get isAuth {
-  //  return token != null;
-  //}
-
-  //String get token {
-  //  if (_token != null) {
-  //    return _token;
-  //  }
-  //  return null;
-  //}
-
-  // String get userId {
-  //  return _userId;
-  // }
 
   Future<void> signIn(String email, String password) async {
     final url = Uri.parse('url');
@@ -76,19 +60,13 @@ class AuthController extends GetxService {
       userdata.write('isLogged', true);
       userdata.write('username', _userId);
       userdata.write('email', _email);
+      userdata.write('token', _token);
       var userinfo = await userdata.read('username');
       print(userdata.read('email'));
       print(userinfo);
       if (userinfo != null) {
         Get.off(TabPage());
       }
-      final prefs = await SharedPreferences.getInstance();
-      final userData = json.encode(
-        {'token': _token, 'userId': _userId, 'email': _email},
-      );
-      prefs.setString('userData', userData);
-      //   print(userData);
-      print(prefs);
     } catch (error) {
       //    throw error;
       //    print(error.message);

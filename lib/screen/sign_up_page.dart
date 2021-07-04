@@ -198,7 +198,7 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/1.jpg'),
+            image: AssetImage('assets/images/4.jpg'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
           ),
@@ -264,7 +264,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
-        height: size.height * 0.08,
+        height: size.height * 0.1,
         width: size.width * 0.8,
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.5),
@@ -309,7 +309,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
-        height: size.height * 0.08,
+        height: size.height * 0.1,
         width: size.width * 0.8,
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.5),
@@ -355,7 +355,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
-        height: size.height * 0.08,
+        height: size.height * 0.1,
         width: size.width * 0.8,
         decoration: BoxDecoration(
           color: Colors.white70.withOpacity(0.5),
@@ -402,7 +402,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
-        height: size.height * 0.08,
+        height: size.height * 0.1,
         width: size.width * 0.8,
         decoration: BoxDecoration(
           color: Colors.white70.withOpacity(0.5),

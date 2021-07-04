@@ -142,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
-        height: size.height * 0.08,
+        height: size.height * 0.1,
         width: size.width * 0.8,
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.5),
@@ -187,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
-        height: size.height * 0.08,
+        height: size.height * 0.1,
         width: size.width * 0.8,
         decoration: BoxDecoration(
           color: Colors.white70.withOpacity(0.5),

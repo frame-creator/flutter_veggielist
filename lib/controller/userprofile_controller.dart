@@ -2,9 +2,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_veggielist_app/models/user.dart';
-import 'package:my_veggielist_app/screen/tab.dart';
-import 'package:my_veggielist_app/screen/user_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'dart:convert';
 //import 'package:my_veggielist_app/http/http_exception.dart';
 
@@ -26,7 +24,7 @@ class ProfileController extends GetxController {
     final url = Uri.parse('url');
 
     final response = await http.get(url);
-    final responseData = json.decode(response.body);
+    //  final responseData = json.decode(response.body);
     if (response.statusCode == 200) {
       isLoading(true);
       var jsonResponse = json.decode(response.body)['user'];

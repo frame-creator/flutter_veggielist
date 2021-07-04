@@ -35,7 +35,7 @@ class UserController extends GetxController {
     var url = Uri.parse('url');
     // Response response = await get(url);
     final response = await http.get(url);
-    final responseData = json.decode(response.body);
+    //  final responseData = json.decode(response.body);
     if (response.statusCode == 200) {
       //  isLoading(true);
       List jsonResponse = json.decode(response.body)['places'];
