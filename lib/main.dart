@@ -5,6 +5,8 @@ import 'package:my_veggielist_app/binding/init_binding.dart';
 
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:my_veggielist_app/controller/place_detail_controller.dart';
+import 'package:my_veggielist_app/screen/place_detail_page.dart';
 import 'package:my_veggielist_app/screen/tab.dart';
 
 void main() async {
@@ -25,7 +27,22 @@ class MyApp extends StatelessWidget {
       ),
       initialBinding: InitBinding(),
       initialRoute: "/",
-      getPages: [GetPage(name: "/", page: () => TabPage())],
+      getPages: [
+        GetPage(name: "/", page: () => TabPage()),
+        GetPage(
+          name: "/detail/:id",
+          page: () => PlaceDetailPage(),
+          // binding: BindingsBuilder(
+          //   () => () => Get.lazyPut<PlaceDetailController>(
+          //       () => PlaceDetailController()),
+        ),
+        //  binding: BindingsBuilder(
+        //    () => Get.lazyPut<Controller>(
+        //        () => Controller()
+        //  ),
+        //   ),
+        // )
+      ],
     );
   }
 }

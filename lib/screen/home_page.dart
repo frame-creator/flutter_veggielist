@@ -1,6 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_veggielist_app/controller/place_controller.dart';
+import 'package:my_veggielist_app/screen/place_detail_page.dart';
+import 'package:my_veggielist_app/widgets/place_widget.dart';
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  PlaceController placecontroller = Get.put(PlaceController());
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Obx(() {
+        if (placecontroller.isLoading.value == false) {
+          return Center(
+              child: CircularProgressIndicator(
+            backgroundColor: Colors.yellow,
+          ));
+        } else {
+          return Expanded(
+              child: ListView.builder(
+                  itemCount: placecontroller.places.length,
+                  itemBuilder: (BuildContext context, index) {
+                    //   var singlePlace = placecontroller.places[index];
+                    return PlaceWidget(place: placecontroller.places[index]);
+                  }));
+        }
+      })
+    ]));
+  }
+}
+
+/*import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_veggielist_app/controller/place_controller.dart';
+import 'package:my_veggielist_app/screen/place_detail_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -34,7 +78,11 @@ class _HomePageState extends State<HomePage> {
                     return Padding(
                         padding: EdgeInsets.all(17.0),
                         child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Get.toNamed(
+                                  '/detail/${placecontroller.places[index].id}');
+                              print(singlePlace);
+                            },
                             child: Stack(children: <Widget>[
                               Container(
                                 height: 270.0,
@@ -75,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                                           // SizedBox(width: 5.0),
 
                                           Text(
-                                            '자세히보기',
+                                            '지도 확인',
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 15.0,
@@ -161,3 +209,4 @@ class _HomePageState extends State<HomePage> {
     ]));
   }
 }
+*/
