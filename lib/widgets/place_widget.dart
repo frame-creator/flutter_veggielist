@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import 'package:my_veggielist_app/controller/place_widget_controller.dart';
 import 'package:my_veggielist_app/models/places.dart';
 
@@ -26,7 +26,7 @@ class _PlaceWidgetState extends State<PlaceWidget> {
 
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(left: 25, right: 25, top: 15),
+        padding: EdgeInsets.only(left: 25, right: 25, top: 20),
         child: Stack(
           children: <Widget>[
             Container(
@@ -68,16 +68,21 @@ class _PlaceWidgetState extends State<PlaceWidget> {
                         width: 5,
                       ),
                       Text(widget.place.title,
-                          style: GoogleFonts.montserrat(
-                              fontSize: 32.0,
+                          style: TextStyle(
+                              //GoogleFonts.montserrat(
+                              fontFamily: 'IBMPlexSansKR-Bold',
+                              fontSize: 28.0,
                               fontWeight: FontWeight.bold,
-                              textStyle: TextStyle(color: Colors.white)))
+                              color: Colors.white))
                     ]),
                     Text(widget.place.address,
-                        style: GoogleFonts.montserrat(
-                            fontSize: 18.0,
+                        style: TextStyle(
+                            fontFamily: 'IBMPlexSansKR-Medium',
+                            //GoogleFonts.montserrat(
+                            fontSize: 20.0,
                             fontWeight: FontWeight.w400,
-                            textStyle: TextStyle(color: Colors.white))),
+                            color: Colors.white)),
+                    //textStyle: TextStyle(color: Colors.white))),
                     SizedBox(height: 20.0),
                     InkWell(
                         onTap: () {
@@ -100,13 +105,17 @@ class _PlaceWidgetState extends State<PlaceWidget> {
                                 //        child:
                                 Center(
                                     child: Text('지도확인',
-                                        style: GoogleFonts.montserrat(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold,
-                                            textStyle: TextStyle(
+                                        style:
+                                            //GoogleFonts.montserrat(
+                                            TextStyle(
+                                                fontFamily:
+                                                    'IBMPlexSansKR-Regular',
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold,
+                                                //textStyle: TextStyle(
                                                 color:
                                                     //Colors.white,
-                                                    Color(0xFFF0B690))))))
+                                                    Color(0xFFF0B690)))))
                         // )
                         ),
                     SizedBox(height: 30.0),
