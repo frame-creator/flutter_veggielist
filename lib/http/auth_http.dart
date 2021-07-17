@@ -68,4 +68,22 @@ class AuthHttp {
       return e.response.data;
     } catch (e) {}
   }
+
+  static Future deletePlaceHttp(String id) async {
+    try {
+      final userdata = GetStorage();
+      var usertoken = userdata.read('token');
+      Response response = await Dio().delete('url',
+          // data: null,
+          options: Options(headers: <String, String>{
+            //'Content-Type': 'application/json; charset=UTF-8',
+            //'Content-Type': "multipart/form-data",
+            'authorization': "Bearer $usertoken"
+          }));
+      print(response.data);
+      return response.data;
+    } on DioError catch (e) {
+      return e.response.data;
+    } catch (e) {}
+  }
 }

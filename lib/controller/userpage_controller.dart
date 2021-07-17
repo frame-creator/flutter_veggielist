@@ -16,20 +16,6 @@ class UserController extends GetxController {
     super.onInit();
   }
 
-  //bool get isAuth {
-  //  return token != null;
-  //}
-
-  //String get token {
-  //  if (_token != null) {
-  //    return _token;
-  //  }
-  //  return null;
-  //}
-
-  // String get userId {
-  //  return _userId;
-  // }
   Future<dynamic> getUserPlaces() async {
     var userinfo = userdata.read('username');
     var url = Uri.parse('url');

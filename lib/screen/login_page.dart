@@ -6,6 +6,7 @@ import 'package:my_veggielist_app/controller/userprofile_controller.dart';
 import 'package:my_veggielist_app/screen/sign_up_page.dart';
 import 'package:get/get.dart';
 import 'package:my_veggielist_app/screen/tab.dart';
+import 'package:my_veggielist_app/screen/user_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -34,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
     //_nameController.text, _emailController.text,
     // _passwordController.text, _imageFile.path);
     profilecontroller.getUserProfile();
-    Get.to(TabPage());
+    Get.to(UserPage());
   }
   //Color themeColorOne = Colors.amber[400];
   //Color(0xFFD87423);

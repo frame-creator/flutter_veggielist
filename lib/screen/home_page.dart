@@ -20,24 +20,62 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Obx(() {
-        if (placecontroller.isLoading.value == false) {
-          return Center(
-              child: CircularProgressIndicator(
-            backgroundColor: Colors.yellow,
-          ));
-        } else {
-          return Expanded(
-              child: ListView.builder(
-                  itemCount: placecontroller.places.length,
-                  itemBuilder: (BuildContext context, index) {
-                    //   var singlePlace = placecontroller.places[index];
-                    return PlaceWidget(place: placecontroller.places[index]);
-                  }));
-        }
-      })
-    ]));
+        body:
+            //Container(
+            //    color: const Color(0xFFF3DBCB),
+            //    child:
+            ListView(
+                scrollDirection: Axis.vertical,
+                physics: AlwaysScrollableScrollPhysics(),
+                children: <Widget>[
+          homeWelcome(),
+          homePlaces(),
+        ])
+        // )
+        );
+  }
+
+  Widget homeWelcome() {
+    return Stack(children: <Widget>[
+      Container(height: 310.0),
+      Container(
+        height: 300.0,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/ve.gif'), fit: BoxFit.cover)),
+      ),
+      SizedBox(height: 10.0)
+    ]);
+  }
+
+  Widget homePlaces() {
+    return
+        //Scaffold(
+        //     body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Obx(() {
+      if (placecontroller.isLoading.value == false) {
+        return Center(
+            child: CircularProgressIndicator(
+          backgroundColor: Colors.yellow,
+        ));
+      } else {
+        return
+            //   Expanded(
+            //       child:
+            ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: placecontroller.places.length,
+                itemBuilder: (BuildContext context, index) {
+                  //   var singlePlace = placecontroller.places[index];
+                  return PlaceWidget(place: placecontroller.places[index]);
+                });
+        //  );
+      }
+    }
+            //    )
+            //  ])
+            );
   }
 }
 

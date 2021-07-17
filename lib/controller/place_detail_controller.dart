@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:my_veggielist_app/controller/place_controller.dart';
+
 import 'package:my_veggielist_app/models/places.dart';
 
 import 'place_widget_controller.dart';

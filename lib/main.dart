@@ -5,7 +5,6 @@ import 'package:my_veggielist_app/binding/init_binding.dart';
 
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:my_veggielist_app/controller/place_detail_controller.dart';
 import 'package:my_veggielist_app/screen/place_detail_page.dart';
 import 'package:my_veggielist_app/screen/tab.dart';
 

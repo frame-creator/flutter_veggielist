@@ -1,28 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:my_veggielist_app/controller/userpage_controller.dart';
 import 'package:my_veggielist_app/http/auth_http.dart';
+import 'package:my_veggielist_app/screen/tab.dart';
 
 class CreatePlaceController extends GetxController {
   var isLoading = false.obs;
   final userdata = GetStorage();
+  UserController usercontroller = Get.put(UserController());
 
   Future<void> createPlace(
       String title, String address, String description, filePath) async {
     try {
       isLoading(true);
       if (filePath != null) {
-        var response =
-            await AuthHttp.createPlaceHttp(title, address, address, filePath);
+        var response = await AuthHttp.createPlaceHttp(
+            title, address, description, filePath);
         print(response);
         //   print(response['userId']);
         if (response
             //['userId']
             !=
             null) {
-          Get.back();
+          usercontroller.fetchUserPlaces();
           Get.snackbar("장소가 등록되었습니다.", "감사합니다.",
               margin: EdgeInsets.only(top: 5, left: 10, right: 10));
+          Get.offAll(TabPage());
         }
         //   final responseData = json.decode(response.body);
         //   print(responseData);

@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:my_veggielist_app/controller/userpage_controller.dart';
 import 'package:my_veggielist_app/controller/userprofile_controller.dart';
+import 'package:my_veggielist_app/screen/login_page.dart';
 import 'package:my_veggielist_app/screen/tab.dart';
+import 'package:my_veggielist_app/widgets/user_place_widget.dart';
 
 class UserPage extends StatefulWidget {
   UserPage({Key key}) : super(key: key);
@@ -26,13 +28,19 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(
-            scrollDirection: Axis.vertical,
-            physics: AlwaysScrollableScrollPhysics(),
-            children: <Widget>[
+        body:
+            //Container(
+            //    color: const Color(0xFFF3DBCB),
+            //    child:
+            ListView(
+                scrollDirection: Axis.vertical,
+                physics: AlwaysScrollableScrollPhysics(),
+                children: <Widget>[
           userProfile(),
           userPlace(),
-        ]));
+        ])
+        // )
+        );
   }
 
   Widget userProfile() {
@@ -114,7 +122,7 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
                   child: TextButton(
                     onPressed: () {
                       userdata.erase();
-                      Get.off(TabPage());
+                      Get.offAll(TabPage());
                     },
                     child: Text('로그아웃',
                         style: TextStyle(
@@ -135,6 +143,25 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
     //   );
   }
 
+  Widget userPlace() {
+    return Obx(() {
+      if (usercontroller.places.length == null ||
+          usercontroller.places.length == 0) {
+        return Text('등록하신 장소가 없습니다.');
+      } else {
+        return ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: usercontroller.places.length,
+            itemBuilder: (BuildContext context, index) {
+              //   var singlePlace = placecontroller.places[index];
+              return UserPlaceWidget(place: usercontroller.places[index]);
+            });
+      }
+    });
+  }
+}
+/*
   Widget userPlace() {
     return Obx(() {
       //  if (usercontroller.isLoading.value == false) {
@@ -281,7 +308,7 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
   }
 }
 
-/*
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_veggielist_app/controller/place_controller.dart';

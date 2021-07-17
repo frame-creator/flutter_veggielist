@@ -65,7 +65,7 @@ class AuthController extends GetxService {
       print(userdata.read('email'));
       print(userinfo);
       if (userinfo != null) {
-        Get.off(TabPage());
+        Get.offAll(TabPage());
       }
     } catch (error) {
       //    throw error;
