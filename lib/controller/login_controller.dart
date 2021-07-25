@@ -3,6 +3,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_veggielist_app/screen/tab.dart';
 import 'dart:convert';
+
 //import 'package:my_veggielist_app/http/http_exception.dart';
 
 class AuthController extends GetxService {

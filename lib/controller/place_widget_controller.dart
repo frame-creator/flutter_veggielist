@@ -5,8 +5,6 @@ import 'package:my_veggielist_app/controller/userpage_controller.dart';
 import 'package:my_veggielist_app/http/auth_http.dart';
 import 'package:my_veggielist_app/models/places.dart';
 import 'package:my_veggielist_app/screen/tab.dart';
-import 'package:my_veggielist_app/screen/user_page.dart';
-import 'package:get/get.dart';
 
 class PlaceWidgetController extends GetxController {
   Place place;

@@ -5,6 +5,8 @@ import 'package:my_veggielist_app/controller/userpage_controller.dart';
 import 'package:my_veggielist_app/controller/userprofile_controller.dart';
 import 'package:my_veggielist_app/screen/login_page.dart';
 import 'package:my_veggielist_app/screen/tab.dart';
+import 'package:my_veggielist_app/widgets/default_place_widget.dart';
+import 'package:my_veggielist_app/widgets/progress_indicator.dart';
 import 'package:my_veggielist_app/widgets/user_place_widget.dart';
 
 class UserPage extends StatefulWidget {
@@ -20,6 +22,20 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
   final userdata = GetStorage();
 
   final UserController usercontroller = Get.put(UserController());
+  final ProfileController profilecontroller = Get.put(ProfileController());
+  void _submit() {
+    Get.defaultDialog(
+        title: '회원탈퇴시 복원되지 않습니다.',
+        middleText: '정말로 탈퇴하시겠습니까?',
+        textCancel: '취소',
+        cancelTextColor: Colors.amber,
+        textConfirm: '삭제',
+        confirmTextColor: Colors.white,
+        onConfirm: () {
+          profilecontroller.deleteUser(profilecontroller.user.value.id);
+        });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -38,20 +54,30 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
                 children: <Widget>[
           userProfile(),
           userPlace(),
+          SizedBox(height: 30),
+          roundedButton('회원 탈퇴'),
+          SizedBox(height: 30),
         ])
         // )
         );
   }
 
   Widget userProfile() {
-    final ProfileController profilecontroller = Get.put(ProfileController());
+    //final ProfileController profilecontroller = Get.put(ProfileController());
 
     return Obx(() {
       if (profilecontroller.isLoading.value == false) {
-        return Center(
-            child: CircularProgressIndicator(
-          backgroundColor: Colors.yellow,
-        ));
+        return Container();
+        //MyProgressIndicator();
+        // Center(
+        //     child: SizedBox(
+        //         width: 80,
+        //         height: 80,
+        //         child: Image.asset('assets/icons/loading.gif')));
+        //Center(
+        //    child: CircularProgressIndicator(
+        //  backgroundColor: Colors.yellow,
+        //));
       } else {
         return
             //Scaffold(
@@ -67,6 +93,29 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
                   image: DecorationImage(
                       image: AssetImage('assets/images/1.jpg'),
                       fit: BoxFit.cover)),
+            ),
+            Positioned(
+              top: 150.0,
+              right: 25.0,
+              child: Container(
+                height: 40.0,
+                width: 95.0,
+                decoration: BoxDecoration(
+                    color: Color(0xFFF3B287),
+                    borderRadius: BorderRadius.circular(12.0)),
+                child: TextButton(
+                  onPressed: () {
+                    userdata.erase();
+                    Get.offAll(TabPage());
+                  },
+                  child: Text('로그아웃',
+                      style: TextStyle(
+                          fontFamily: 'IBMPlexSansKR-Regular',
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)),
+                ),
+              ),
             ),
             Positioned(
               top: 150.0,
@@ -97,41 +146,23 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
                           : profilecontroller.user.value.name,
                       style: TextStyle(
                           fontFamily: 'SDSamliphopangcheOutline',
-                          fontSize: 19.0,
+                          fontSize: 21.0,
                           fontWeight: FontWeight.bold),
                     ),
+                    SizedBox(height: 3.0),
                     Text(
                       (profilecontroller.user.value.email == null)
                           ? '이메일 주소'
                           : profilecontroller.user.value.email,
                       style: TextStyle(
                           fontFamily: 'SDSamliphopangcheOutline',
-                          fontSize: 15.0,
+                          fontSize: 17.0,
                           color: Colors.grey,
                           fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
                 SizedBox(width: 15.0),
-                Container(
-                  height: 30.0,
-                  width: 75.0,
-                  decoration: BoxDecoration(
-                      color: Color(0xFFF3B287),
-                      borderRadius: BorderRadius.circular(12.0)),
-                  child: TextButton(
-                    onPressed: () {
-                      userdata.erase();
-                      Get.offAll(TabPage());
-                    },
-                    child: Text('로그아웃',
-                        style: TextStyle(
-                            fontFamily: 'IBMPlexSansKR-Regular',
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
-                  ),
-                ),
               ]),
             ),
           ],
@@ -145,22 +176,55 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
 
   Widget userPlace() {
     return Obx(() {
-      if (usercontroller.places.length == null ||
-          usercontroller.places.length == 0) {
-        return Text('등록하신 장소가 없습니다.');
+      if (usercontroller.isLoading.value == false) {
+        return Center(
+            child: SizedBox(
+                width: 80,
+                height: 80,
+                child: Image.asset('assets/icons/loading.gif')));
       } else {
-        return ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: usercontroller.places.length,
-            itemBuilder: (BuildContext context, index) {
-              //   var singlePlace = placecontroller.places[index];
-              return UserPlaceWidget(place: usercontroller.places[index]);
-            });
+        if (usercontroller.places.length == 0) {
+          return DefaultPlaceWidget();
+        } else {
+          return ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: usercontroller.places.length,
+              itemBuilder: (BuildContext context, index) {
+                //   var singlePlace = placecontroller.places[index];
+                return UserPlaceWidget(place: usercontroller.places[index]);
+              });
+        }
       }
     });
   }
+
+  Widget roundedButton(String buttonName) {
+    return Stack(children: <Widget>[
+      Container(height: 50),
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Container(
+          height: Get.height * 0.08,
+          width: Get.width * 0.8,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: Color(0xFFF3B287),
+          ),
+          child: FlatButton(
+            onPressed: _submit,
+            child: Text(buttonName,
+                style: TextStyle(
+                    fontFamily: 'IBMPlexSansKR-Regular',
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white)),
+          ),
+        )
+      ])
+    ]);
+  }
 }
+
 /*
   Widget userPlace() {
     return Obx(() {

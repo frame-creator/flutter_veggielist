@@ -6,7 +6,7 @@ import 'package:my_veggielist_app/models/places.dart';
 
 class UserController extends GetxController {
   static UserController get to => Get.find();
-
+  var isLoading = false.obs;
   final userdata = GetStorage();
   //var isLoading = false.obs;
   RxList places = [].obs;
@@ -39,11 +39,14 @@ class UserController extends GetxController {
     //  print(responseData['userId']);
   }
 
-  void fetchUserPlaces() async {
+  //void
+  Future fetchUserPlaces() async {
     var placeList = await getUserPlaces();
+    isLoading(true);
     if (places != null) {
       places.assignAll(placeList);
       //    print(placeList);
+
     }
   }
 }
