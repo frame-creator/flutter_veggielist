@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:my_veggielist_app/controller/place_widget_controller.dart';
 import 'package:my_veggielist_app/models/places.dart';
-import 'package:my_veggielist_app/screen/user_page.dart';
 
 class UserPlaceWidget extends StatefulWidget {
   final Place place;

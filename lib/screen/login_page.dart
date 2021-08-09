@@ -5,7 +5,6 @@ import 'package:my_veggielist_app/controller/login_controller.dart';
 import 'package:my_veggielist_app/controller/userprofile_controller.dart';
 import 'package:my_veggielist_app/screen/sign_up_page.dart';
 import 'package:get/get.dart';
-import 'package:my_veggielist_app/screen/tab.dart';
 import 'package:my_veggielist_app/screen/user_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -237,6 +236,7 @@ class _LoginPageState extends State<LoginPage> {
         borderRadius: BorderRadius.circular(16),
         color: mainColor,
       ),
+      // ignore: deprecated_member_use
       child: FlatButton(
         onPressed: () {
           _submit();

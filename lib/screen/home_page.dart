@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:my_veggielist_app/controller/place_controller.dart';
+import 'package:my_veggielist_app/screen/contact.dart';
 import 'package:my_veggielist_app/screen/create_place_route.dart';
 
 import 'package:my_veggielist_app/widgets/place_widget.dart';
-import 'package:my_veggielist_app/widgets/progress_indicator.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -264,7 +264,7 @@ class _HomePageState extends State<HomePage>
                   child: SizedBox(
                       width: 80,
                       height: 80,
-                      child: Image.asset('assets/icons/loading.gif')))
+                      child: Image.asset('assets/icons/loading1.gif')))
             ]); //Center(
         //    child: CircularProgressIndicator(
         //   backgroundColor: Colors.yellow,
@@ -341,9 +341,7 @@ class _HomePageState extends State<HomePage>
                   ),
                   InkWell(
                     onTap: () {
-                      setState(() {
-                        _sideMoved = !_sideMoved;
-                      });
+                      Get.to(MailerPage());
                     },
                     child: Padding(
                         padding: EdgeInsets.all(5),

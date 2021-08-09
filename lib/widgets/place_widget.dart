@@ -16,6 +16,7 @@ class PlaceWidget extends StatefulWidget {
 }
 
 class _PlaceWidgetState extends State<PlaceWidget> {
+  // ignore: unused_field
   PlaceWidgetController _placeWidgetController;
   @override
   void initState() {

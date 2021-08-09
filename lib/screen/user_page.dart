@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:my_veggielist_app/controller/userpage_controller.dart';
 import 'package:my_veggielist_app/controller/userprofile_controller.dart';
-import 'package:my_veggielist_app/screen/login_page.dart';
+
 import 'package:my_veggielist_app/screen/tab.dart';
 import 'package:my_veggielist_app/widgets/default_place_widget.dart';
-import 'package:my_veggielist_app/widgets/progress_indicator.dart';
+
 import 'package:my_veggielist_app/widgets/user_place_widget.dart';
 
 class UserPage extends StatefulWidget {
@@ -156,7 +156,7 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
                           : profilecontroller.user.value.email,
                       style: TextStyle(
                           fontFamily: 'SDSamliphopangcheOutline',
-                          fontSize: 17.0,
+                          fontSize: 15.0,
                           color: Colors.grey,
                           fontWeight: FontWeight.bold),
                     ),
@@ -181,7 +181,7 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
             child: SizedBox(
                 width: 80,
                 height: 80,
-                child: Image.asset('assets/icons/loading.gif')));
+                child: Image.asset('assets/icons/loading1.gif')));
       } else {
         if (usercontroller.places.length == 0) {
           return DefaultPlaceWidget();
@@ -210,6 +210,7 @@ class UserPageState extends State<UserPage> with TickerProviderStateMixin {
             borderRadius: BorderRadius.circular(16),
             color: Color(0xFFF3B287),
           ),
+          // ignore: deprecated_member_use
           child: FlatButton(
             onPressed: _submit,
             child: Text(buttonName,

@@ -53,6 +53,7 @@ class PlaceDetailPage extends StatefulWidget {
 class _PlaceDetailPageState extends State<PlaceDetailPage> {
   List<Marker> allMarkers = [];
 
+  // ignore: unused_field
   GoogleMapController _controller;
   PlaceDetailController _placeDetailController;
 

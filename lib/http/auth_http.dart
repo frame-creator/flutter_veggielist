@@ -21,12 +21,13 @@ class AuthHttp {
             filename: 'veggielist.jpg', contentType: MediaType(mimee, type))
       });
 
-      Response response = await Dio().post('url',
-          data: formData,
-          options: Options(headers: <String, String>{
-            //  'Content-Type': 'application/json; charset=UTF-8',
-            'Content-Type': "multipart/form-data"
-          }));
+      Response response =
+          await Dio().post('url',
+              data: formData,
+              options: Options(headers: <String, String>{
+                //  'Content-Type': 'application/json; charset=UTF-8',
+                'Content-Type': "multipart/form-data"
+              }));
       return response.data;
       // ignore: dead_code
       print(response.data);
@@ -54,13 +55,14 @@ class AuthHttp {
             filename: 'placelist.jpg', contentType: MediaType(mimee, type))
       });
 
-      Response response = await Dio().post('url',
-          data: formData,
-          options: Options(headers: <String, String>{
-            //  'Content-Type': 'application/json; charset=UTF-8',
-            'Content-Type': "multipart/form-data",
-            'authorization': "Bearer $usertoken"
-          }));
+      Response response =
+          await Dio().post('url',
+              data: formData,
+              options: Options(headers: <String, String>{
+                //  'Content-Type': 'application/json; charset=UTF-8',
+                'Content-Type': "multipart/form-data",
+                'authorization': "Bearer $usertoken"
+              }));
       return response.data;
       // ignore: dead_code
       print(response.data);
@@ -73,13 +75,14 @@ class AuthHttp {
     try {
       final userdata = GetStorage();
       var usertoken = userdata.read('token');
-      Response response = await Dio().delete('url',
-          // data: null,
-          options: Options(headers: <String, String>{
-            //'Content-Type': 'application/json; charset=UTF-8',
-            //'Content-Type': "multipart/form-data",
-            'authorization': "Bearer $usertoken"
-          }));
+      Response response =
+          await Dio().delete('url',
+              // data: null,
+              options: Options(headers: <String, String>{
+                //'Content-Type': 'application/json; charset=UTF-8',
+                //'Content-Type': "multipart/form-data",
+                'authorization': "Bearer $usertoken"
+              }));
       print(response.data);
       return response.data;
     } on DioError catch (e) {
@@ -92,13 +95,14 @@ class AuthHttp {
     try {
       final userdata = GetStorage();
       var usertoken = userdata.read('token');
-      Response response = await Dio().delete('url',
-          // data: null,
-          options: Options(headers: <String, String>{
-            //'Content-Type': 'application/json; charset=UTF-8',
-            //'Content-Type': "multipart/form-data",
-            'authorization': "Bearer $usertoken"
-          }));
+      Response response =
+          await Dio().delete('url',
+              // data: null,
+              options: Options(headers: <String, String>{
+                //'Content-Type': 'application/json; charset=UTF-8',
+                //'Content-Type': "multipart/form-data",
+                'authorization': "Bearer $usertoken"
+              }));
       print(response.data);
       return response.data;
     } on DioError catch (e) {
