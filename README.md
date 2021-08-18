@@ -33,6 +33,12 @@
 
 ## ✏ 기술 소개
 
+### API
+| API | <img width= 50 src="https://developers.google.com/maps/images/maps-icon.svg"> | 
+| :--: | :--: |
+| **Link** | [Google Map API](https://cloud.google.com/maps-platform?hl=ko) | 
+
+
 </br>
 
 ### Front-End
@@ -44,11 +50,17 @@
 </br>
 
 ### Back-End
-| Spec | <img width= 80 src="https://github.com/frame-creator/stackimage/blob/master/stackimg/nodejs-1.png?raw=true"> | <img width= 80 src="https://github.com/frame-creator/stackimage/blob/master/stackimg/aws_s3.png?raw=true"> | <img width= 80 src="https://github.com/frame-creator/stackimage/blob/master/stackimg/herokulogo.png?raw=true"> | 
-| :--: | :--: | :--: | :--: |  
-| **Description** | Nodejs | Aws S3 | Heroku |
+| Spec | <img width= 50 src="https://github.com/frame-creator/stackimage/blob/master/stackimg/nodejs-1.png?raw=true"> | <img width= 50 src="https://www.sourcefuse.com/wp-content/uploads/2018/11/express.png"> | <img width= 50 src="https://github.com/frame-creator/stackimage/blob/master/stackimg/mongodblogo.png?raw=true"> | <img width= 50 src="https://d1.awsstatic.com/icons/jp/console_s3_icon.64795d08c5e23e92c12fe08c2dd5bd99255af047.png"> | 
+| :--: | :--: | :--: | :--: | :--: |  
+| **Description** | Nodejs | Express | MongoDB | Aws S3 |
 
 </br>
+
+
+### Infrastructure
+| Spec |   <img width= 50 src="https://github.com/frame-creator/stackimage/blob/master/stackimg/herokulogo.png?raw=true"> | 
+| :--: | :--: | 
+| **Description** | Heroku | 
 
 <br/>
 
