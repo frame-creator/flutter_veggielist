@@ -44,7 +44,7 @@
 </br>
 
 ### Back-End
-| Spec | <img width= 50 src="https://github.com/frame-creator/stackimage/blob/master/stackimg/nodejs-1.png?raw=true"> | <img width= 50 src="https://github.com/frame-creator/stackimage/blob/master/stackimg/aws_s3.png?raw=true"> | <img width= 50 src="https://github.com/frame-creator/stackimage/blob/master/stackimg/herokulogo.png?raw=true"> | 
+| Spec | <img width= 80 src="https://github.com/frame-creator/stackimage/blob/master/stackimg/nodejs-1.png?raw=true"> | <img width= 80 src="https://github.com/frame-creator/stackimage/blob/master/stackimg/aws_s3.png?raw=true"> | <img width= 80 src="https://github.com/frame-creator/stackimage/blob/master/stackimg/herokulogo.png?raw=true"> | 
 | :--: | :--: | :--: | :--: |  
 | **Description** | Nodejs | Aws S3 | Heroku |
 
@@ -57,4 +57,7 @@
 
 
 
-<p align="center"><img width="15%"  src="https://github.com/frame-creator/stackimage/blob/master/reademe/icon512.png?raw=true"></p>
+<p align="center"><img width="20%"  src="https://github.com/frame-creator/stackimage/blob/master/reademe/icon512.png?raw=true"></p>
+
+
+
